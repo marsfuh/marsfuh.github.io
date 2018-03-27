@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>傅日明的首頁</title>
   </head>
-  <body>
+  <body onload="startClock()" onunload="stopClock()">
+    <div id="show"></div>
     <img src="coffee.jpg" alt="愛喝咖啡" width="320" height="240"/>
     <h1>我的興趣</h1>
     <ol>
@@ -13,6 +14,31 @@
       <li>玩神魔</li>
       
     </ol>
-
+    <script>
+      var timer = null;
+      // 顯示數字圖片
+      function displayClock(num) {
+        var dig = parseInt(num/10);
+        var timetag="<img src='images\\" + dig + ".gif'>";
+        dig = num%10;
+        timetag +="<img src='images\\" + dig + ".gif'>";
+        return timetag;
+      }
+      // 停止計時
+      function stopClock() {
+        clearTimeout(timer);
+      }
+      // 開始計時
+      function startClock() {
+        var time = new Date();
+        // 取得時間
+        var hours = displayClock(time.getHours()) + ":";
+        var minutes = displayClock(time.getMinutes()) + ":";
+        var seconds = displayClock(time.getSeconds());
+        // 顯示時間
+        show.innerHTML = hours + minutes + seconds;
+        timer = setTimeout("startClock()",1000);
+      }
+    </script>
   </body>
 </html>
